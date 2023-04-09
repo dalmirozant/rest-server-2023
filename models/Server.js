@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 class Server {
     constructor(){
         this.app = express();
@@ -12,12 +13,37 @@ class Server {
     }
 
     middlewares(){
+        this.app.use(cors());
         this.app.use(express.static('public'));
     }
 
     routes(){
         this.app.get('/api', (req, res) => {
-            res.send('¡Hola, mundo!');
+            res.json({
+                ok: true,
+                msg:'Corriendo API'
+            });
+          });
+          
+        this.app.put('/api', (req, res) => {
+            res.json({
+                ok: true,
+                msg:'put API'
+            });
+          });
+          
+        this.app.post('/api', (req, res) => {
+            res.json({
+                ok: true,
+                msg:'post API'
+            });
+          });
+          
+        this.app.delete('/api', (req, res) => {
+            res.json({
+                ok: true,
+                msg:'delete API'
+            });
           });
     }
 
