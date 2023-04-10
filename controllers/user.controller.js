@@ -23,12 +23,20 @@ const updateUser = (req, res) => {
 const createUser = async (req, res) => {
     const body = req.body;
     const usuario = new Usuario(body);
-
+    try{
     await usuario.save()
+    
     res.json({
         ok: true,
         usuario,
     });
+    }
+    catch(err){
+      res.status(500).json({
+        ok:false,
+        err
+      })
+    }
   }
 
 const deleteUser = (req, res) => {
